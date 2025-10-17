@@ -2,34 +2,82 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
     <title>Zimeng Zhao</title>
-    
     <meta name="author" content="Zimeng Zhao">
-
-    <!-- Enable responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="Zimeng Zhao, Zhao Zimeng, Zimeng, 赵, 子萌, 东南大学, 自动化学院">
 
-    <!-- Le styles -->
     <link href="assets/bootstrap.min.css" rel="stylesheet">
     <link href="assets/font-awesome.min.css" rel="stylesheet">
     <link href="assets/syntax.css" rel="stylesheet">
     <link href="assets/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="assets/imgs/icons/head_mice.svg" type="image/x-icon" />
-
-    <link rel="alternate" type="application/rss+xml" title="" href="assets/feed.xml">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script type="text/javascript" async="" src="assets/inpage_linkid.js" id="undefined"></script><script type="text/javascript" async="" src="assets/ga.js"></script><script type="text/javascript" async="" src="assets/analytics.js"></script><script async="" src="assets/js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-143609665-1');
-    </script>
-
+    
     <style>
+        /* 添加清除浮动的规则 */
+        .heading::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .paper-item {
+            display: flex;
+            align-items: flex-start; /* 顶部对齐 */
+            margin-bottom: 30px; /* 项间距 */
+            clear: both;
+        }
+
+        .div_left {
+            flex-shrink: 0; /* 防止图片被压缩 */
+            margin-right: 20px; /* 图片和文字间距 */
+        }
+
+        .div_right {
+            flex: 1; /* 占据剩余空间 */
+        }
+        /* 新增样式 */
+        .topic-header {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        .topic-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .toggle-icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .topic-content {
+            display: none;
+            padding-left: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .topic-content.active {
+            display: block;
+        }
+        
+        .topic-item {
+            margin-bottom: 30px;
+        }
+        
+        .topic-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 原有样式 */
         #icon-list li{list-style-type:none; float:left; margin:0px; padding-left: 0px}
         #icon-list li a { position:relative; display:block;margin-right:20px}
         #icon-list img { width: 36px; height: 36px; display:block}
@@ -40,6 +88,40 @@
                         filter:alpha(Opacity=60);
                         -moz-opacity:0.6;
                         opacity: 0.6;}
+        .div_left { float: left; margin-right: 20px; }
+        .div_right { overflow: hidden; }
+        .ccontent { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .heading { margin-bottom: 30px; }
+        .Bio, .News, .Research, .Education { margin-bottom: 50px; }
+        .hr-text {
+            line-height: 1em;
+            position: relative;
+            outline: 0;
+            border: 0;
+            color: black;
+            text-align: center;
+            height: 1.5em;
+            opacity: .5;
+            margin: 20px 0;
+        }
+        .hr-text:before {
+            content: '';
+            background: linear-gradient(to right, transparent, #818078, transparent);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+        }
+        .hr-text:after {
+            content: attr(data-content);
+            position: relative;
+            display: inline-block;
+            color: black;
+            padding: 0 .5em;
+            line-height: 1.5em;
+            background-color: #fcfcfa;
+        }
     </style>
 </head>
 
@@ -69,24 +151,8 @@
                     <img src="assets/imgs/icons/link_ReaserchgateSquare.svg" title="Researchgate">
                     </a>
                 </li>
-                <li><a href="https://github.com/TneitaP">
-                    <img src="assets/imgs/icons/link_GithubCircle_1024full.svg" title="Github">
-                    </a>
-                </li>
-                <li><a href="https://gitee.com/TneitaP">
-                    <img src="assets/imgs/icons/link_GiteeCircle_1024full.svg" title="Gitee">
-                    </a>
-                </li>
-                <!-- <li><a href="https://stackoverflow.com/users/8906697/zimeng-zhao?tab=profile">
-                    <img src="assets/imgs/icons/link_StackoverflowSquare_1024full.svg" title="Stackoverflow">
-                    </a>
-                </li> -->
                 <li><a href="https://www.linkedin.com/in/zimeng-zhao-7a75841a1/">
                     <img src="assets/imgs/icons/link_LinkedinSquare_1024full.svg" title="LinkedIn">
-                    </a>
-                </li>
-                <li><a href="https://www.zhihu.com/people/vitruvius-92">
-                    <img src="assets/imgs/icons/link_ZhihuSquare2.svg" title="ZhiHu">
                     </a>
                 </li>
             </div>
@@ -94,290 +160,217 @@
             <div id="contact-list" style="line-height: 36px">
                 <ul class = "list-unstyled list-inline"></ul>
                 <!-- <p>zzmpassion@gmail.com | <a href="https://tneitap.github.io/docs/zzm_cv_en.pdf"> Résumé (PDF) </a> </p> -->
-                <p>zzmpassion@gmail.com </p>
+                <p> <br> zzmpassion@gmail.com <br> zhaozm@qdio.ac.cn </p>
             </div>
         </div> <!-- end div_right -->
         </div> <!-- end content heading -->
-
+            
         <div class="Bio">
-        <header>
-            <h1 margin="0px"> About</h1>
-        </header>
-        <p>
-        Zimeng Zhao is a postdoctoral researcher working with Prof. <a href="https://scholar.google.com/citations?user=UVj2jREAAAAJ&hl">Xiaofeng Li</a> in the <a href="http://www.qdio.ac.cn/klocw/">Key Laboratory of Ocean Circulation and Waves</a>, Institute of Oceanology, Chinese Academy of Sciences. He earned his Ph.D. in control science and engineering from Southeast University in 2024 under the supervision of Prof. <a href="https://scholar.google.com/citations?user=zbJuQMgAAAAJ&hl">Yangang Wang</a>.
-        </p>
-        <p>His research interests lie at the intersection of oceanography and artificial intelligence, with a particular focus on geophysically-constrained learning models.</p>
-        <p>He serves as a reviewer for journals and conferences, including IEEE Transactions on Visualization and Computer Graphics (TVCG), IEEE Transactions on Multimedia (TMM), Conference on Computer Vision and Pattern Recognition (CVPR), and International Conference on Computer Vision (ICCV). </p>
+            <header>
+                <h1 margin="0px"> About</h1>
+            </header>
+            <p>
+            Zimeng Zhao is a postdoctoral researcher working with Prof. <a href="https://scholar.google.com/citations?user=UVj2jREAAAAJ&hl">Xiaofeng Li</a> in the <a href="http://www.qdio.ac.cn/klocw/">Key Laboratory of Ocean Circulation and Waves</a>, Institute of Oceanology, Chinese Academy of Sciences (IOCAS). He earned his Ph.D. in control science and engineering from Southeast University in 2024 under the supervision of Prof. <a href="https://scholar.google.com/citations?user=zbJuQMgAAAAJ&hl">Yangang Wang</a>.
+            </p>
+            <p>His research interests lie at the intersection of oceanography and artificial intelligence, with a particular focus on geophysically-constrained environmental forecasting.</p>
+            <p>He serves as a reviewer for journals (JGR:MLC, IEEE TVCG, IEEE TMM) and conferences (IEEE/CVF CVPR, IEEE/CVF ICCV, ACM MM). </p>
         </div>
-        <br/>
-        <br/>
-        <br/>
-
+        
         <div class="News">
-        <header>
-            <h1> News</h1>
-        </header>
-
-        <ul style="padding-left:2em">
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2024.11</span>
-                <!-- 2023.11.01 -->
-                <span>Joined Institute of Oceanology Chinese Academy of Sciences (IOCAS) as a postdoc. </span>
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2024.10</span>
-                <!-- 2024.10.25 -->
-                <span>Defended the Ph.D. thesis "Research on Reconstruction of Interactive Digital Hands". </span>
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2024.05</span>
-                <span>Honored to receive the Huawei Scholarship. </span>
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2023.05</span>
-                <!-- 2024.05.17 -->
-                <span>Invited Talk at Graduate Student Symposium as part of SEU anniversary celebrations. </span>
-            </li>
-            <!-- <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2023.04.26</span>
-                <span>Presented my Ph.D. thesis proposal entitled "Dynamic Interaction Reconstruction of Digital Hands". </span>
-            </li> -->
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2023.04</span>
-                <!-- 2023.04.21 -->
-                <span>Invited Talk at <a href="http://www.csig3dv.net/studentFotum.html">China3DV 2023 Student Forum</a> hosted by <a href="https://sse.cuhk.edu.cn/en/faculty/hanxiaoguang">Xiaoguang Han</a> and <a href="https://hughw19.github.io">He Wang</a>. </span>
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2021.11</span>
-                <span>Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>. </span>
-            </li>
-            <!-- <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2021.10.21</span>
-                <span>Invited Talk at the <a href="https://mp.weixin.qq.com/s/OqWQ6daaGdxTdoAZNwzvNw">Academic Experience Salon</a> organized by the SEU automation graduate association. </span>
-            </li> -->
-            <!-- <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:6em">2020.12.11</span>
-                <span>Created this Homepage.</span>
-            </li> -->
-        </ul>
+            <header>
+                <h1> News</h1>
+            </header>
+            <ul style="padding-left:2em">
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2026.02</span>
+                    <span>Oral presentation at <a href="https://www.agu.org/Ocean-Sciences-Meeting/">OSM 2026</a>. &#x1F4CD; <span style="color: gray;font-style: italic;">Glasgow SEC</span></span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2025.10</span>
+                    <span>Invited Talk at <a href="https://www.prcv.cn/">PRCV 2025 AI4S Workshop</a> hosted by <a href="https://scholar.google.com/citations?user=UVj2jREAAAAJ&hl">Xiaofeng Li</a>, <a href="https://scholar.google.com/citations?user=pw_0Z_UAAAAJ&hl">Wanli Ouyang</a> and <a href="https://scholar.google.com/citations?user=sakOO04AAAAJ&hl">Lei Bai</a>. &#x1F4CD; <span style="color: gray;font-style: italic;">Shanghai NECC </span></span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2024.11</span>
+                    <span>Joined IOCAS as a postdoc. </span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2024.10</span>
+                    <span>Defended the Ph.D. thesis "Research on Reconstruction of Interactive Digital Hands". </span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2024.05</span>
+                    <span>Honored to receive the Huawei Scholarship. </span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2023.10</span>
+                    <span>Poster presentations at <a href="https://iccv2023.thecvf.com/">ICCV 2023</a>. &#x1F4CD; <span style="color: gray;font-style: italic;">Paris Convention Centre</span></span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2023.04</span>
+                    <span>Invited Talk at <a href="http://china3dv.csig.org.cn/index.html">China3DV 2023 Student Forum</a> hosted by <a href="https://scholar.google.com/citations?user=z-rqsR4AAAAJ&hl">Xiaoguang Han</a> and <a href="https://scholar.google.com/citations?user=roCAWkoAAAAJ&hl">He Wang</a>. &#x1F4CD; <span style="color: gray;font-style: italic;">Beijing Friendship Hotel</span></span>
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:6em">2021.11</span>
+                    <span>Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>. </span>
+                </li>
+            </ul>
         </div>
         
-        <br/>
-        <br/>
-        <br/>
         <div class="Research">
-        <header>
-            <h1> Research </h1>
-        </header>
-        <!-- <p>(<sup><span>†</span></sup>Interns   *Equal Contribution)</p> -->
-        
-        <!-- paper -->
-        <!-- <ul style="padding-left:2em"> -->
-        <tbody>
-            <!-- <hr class="hr-text" data-content="2023"/> -->
-            <!-- 2023 -->
-            <!-- fosup2023 -->
-            <!-- <div id="fosup2023" class="div_left">
-                <img src="assets/imgs/paper2023_fosup.png" class="img-square" width="256">
+            <header>
+                <h1> Research </h1>
+            </header>
+            
+            <!-- Topic01: AI Oceanography -->
+            <div class="topic-item">
+                <div class="topic-header" onclick="toggleTopic(this)">
+                    <h2>AI Oceanography: Environmental Forecasting (2025 ~)</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="topic-content">
+                    <div class="paper-item">
+                        <div class="div_left">
+                            <img src="assets/imgs/paper_2025_langya.png" class="img-square" width="256">
+                        </div>
+                        <div class="div_right">
+                            <p><strong>LangYa: Revolutionizing Cross-Spatiotemporal Ocean Forecasting</strong>
+                                <br>Nan Yang, Chong Wang, Meihua Zhao, <font color="#FF6347">Zimeng Zhao</font>, <br>Huiling Zheng, Bin Zhang, Jianing Wang, Xiaofeng Li<br>
+                                <em>arXiv</em><b> (Under Review)</b>, 2025
+                                <br>[<a href="https://arxiv.org/abs/2412.18097v1">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="fosup2023" class="div_right">
-                <p><strong>FOSUP: Dynamic Garments Diffusion with Fourier Spherical Unwrapping <br>from Monocular Video</strong>
-                    <br>Zhipeng Yu, <font color="#FF6347">Zimeng Zhao</font> and Yangang Wang<br>
-                    IEEE/CVF International Conference on Computer Vision</em><b> (ICCV)</b>, 2021
-                    <br>[<a href="https://www.yangangwang.com/papers/ZZM-SCR-2022-03.pdf">paper</a>]
-                </p>
-            </div> -->
-            <div id="interprior2023" class="div_left">
-                <img src="assets/imgs/paper_2024_midi2interframe.png" class="img-square" width="256">
-            </div>
-            <div id="interprior2023" class="div_right">
-                <p><strong>Music Conditioned Generation for Human-centric Video</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, and Yangang Wang
-                    <br><em>IEEE Signal Processing Letters</em><b> (SPL)</b>, 2024
-                    <br>[<a href="https://ieeexplore.ieee.org/document/10415104">paper</a>]
-                </p>
-            </div>
-            <!-- 2024 -->
-            <hr class="hr-text" data-content="2023"/>
-            <!-- interprior2023 -->
-            <div id="interprior2023" class="div_left">
-                <img src="assets/imgs/paper_2023_interprior.png" class="img-square" width="256">
-            </div>
-            <div id="interprior2023" class="div_right">
-                <p><strong>Reconstructing Interacting Hands with Interaction Prior <br>from Monocular Images</strong>
-                    <br>Binghui Zuo, <font color="#FF6347">Zimeng Zhao</font>, Wenqian Sun, Wei Xie, Zhou Xue and Yangang Wang
-                    <br><em>IEEE/CVF International Conference on Computer Vision</em><b> (ICCV)</b>, 2023
-                    <br>[<a href="https://ieeexplore.ieee.org/document/10378019">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- deformer2023 -->
-            <div id="deformer2023" class="div_left">
-                <img src="assets/imgs/paper_2023_deformer.png" class="img-square" width="256">
-            </div>
-            <div id="deformer2023" class="div_right">
-                <p><strong>Nonrigid Object Contact Estimation <br>with Regional Unwrapping Transformer</strong>
-                    <br>Wei Xie, <font color="#FF6347">Zimeng Zhao</font>, Shiying Li, Binghui Zuo and Yangang Wang
-                    <br><em>IEEE/CVF International Conference on Computer Vision</em><b> (ICCV)</b>, 2023
-                    <br>[<a href="https://ieeexplore.ieee.org/document/10377663">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- mkfree2023 -->
-            <div id="mkfree2023" class="div_left">
-                <img src="assets/imgs/paper_2023_mkfree.png" class="img-square" width="256">
-            </div>
-            <div id="mkfree2023" class="div_right">
-                <p><strong>Semi-supervised Hand Appearance Recovery <br>via Structure Disentanglement and Dual Adversarial Discrimination</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, Zhiyu Long and Yangang Wang<br>
-                    <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition</em><b> (CVPR)</b>, 2023
-                    <br>[<a href="https://ieeexplore.ieee.org/document/10205157">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- hmdo2023 -->
-            <!-- https://www.webofscience.com/wos/alldb/full-record/MEDLINE:37022000 -->
-            <div id="hmdo2023" class="div_left">
-                <img src="assets/imgs/paper_2023_hmdo.png" class="img-square" width="256">
-            </div>
-            <div id="hmdo2023" class="div_right">
-                <p><strong>HMDO : Markerless Multi-view Hand Manipulation Capture <br>with Deformable Objects</strong>
-                    <br>Wei Xie, Zhipeng Yu, <font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo and Yangang Wang<br>
-                    <em>Graphical Models</em><b> (GM)</b>, 2023
-                    <br>[<a href="https://www.sciencedirect.com/science/article/pii/S1524070323000085">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- supple2023 -->
-            <div id="supple2023" class="div_left">
-                <img src="assets/imgs/paper_2023_suple.png" class="img-square" width="256">
-            </div>
-            <div id="supple2023" class="div_right">
-                <p><strong>Skeleton Extraction for Articulated Objects <br>with the Spherical Unwrapping Profiles</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Wei Xie, Binghui Zuo and Yangang Wang<br>
-                    <em>IEEE Transactions on Visualization and Computer Graphics </em><b> (TVCG)</b>, 2023
-                    <br>[<a href="https://ieeexplore.ieee.org/document/10025400">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- 2022 -->
-            <!-- <hr width="50%" align="center"> -->
-            <hr class="hr-text" data-content="2022"/>
-            <!-- stable2022 -->
-            <!-- https://www.webofscience.com/wos/alldb/full-record/WOS:000867754201086 -->
-            <div id="stable" class="div_left">
-                <img src="assets/imgs/paper_2022_stable.png" class="img-square" width="256">
-            </div>
-            <div id="stable" class="div_right">
-                <p><strong>Stability-driven Contact Reconstruction <br>From Monocular Color Images</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, Wei Xie and Yangang Wang<br>
-                    <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition</em><b> (CVPR)</b>, 2022
-                    <br>[<a href="https://ieeexplore.ieee.org/document/9878934">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- 2021 -->
-            <!-- <hr width="50%" align="center"> -->
-            <hr class="hr-text" data-content="2021"/>
-            <!-- supple2021 -->
-            <!-- https://www.webofscience.com/wos/alldb/full-record/WOS:000786496000088 -->
-            <div id="supple" class="div_left">
-                <img src="assets/imgs/paper_2021_suple.png" class="img-square" width="256">
-            </div>
-            <div id="supple" class="div_right">
-                <p><strong>SUPPLE: Extracting Hand Skeleton <br>with Spherical Unwrapping Profiles</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Ruting Rao and Yangang Wang<br>
-                    <em>International Conference on 3D Vision</em><b> (3DV)</b>, 2021
-                    <br>[<a href="https://ieeexplore.ieee.org/document/9665909">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- travelnet2021 -->
-            <div id="travelnet" class="div_left">
-                <img src="assets/imgs/paper_2021_travel.png" class="img-square" width="256">
-            </div>
-            <div id="travelnet" class="div_right">
-                <p><strong>TravelNet: Self-supervised Physically Plausible Hand Motion Learning <br>From Monocular Color Images</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Xi Zhao and Yangang Wang<br>
-                    <em>IEEE/CVF International Conference on Computer Vision</em><b> (ICCV)</b>, 2021
-                    <br>[<a href="https://ieeexplore.ieee.org/document/9709952">paper</a>]
-                </p>
-            </div>
-            <br>
-            <!-- 2020 -->
-            <!-- <hr width="50%" align="center"> -->
-            <hr class="hr-text" data-content="2020"/>
-            <!-- ppnet2020 -->
-            <!-- https://www.webofscience.com/wos/alldb/full-record/WOS:000632644800017 -->
-            <div id="ppnet" class="div_left">
-                <img src="assets/imgs/paper_2020_ppnet.png" class="img-square" width="256">
-            </div>
-            <div id="ppnet" class="div_right">
-                <p><strong>PP-Net: Simultaneous Pose and Shape Reconstruction <br>From a Single Depth Map</strong>
-                    <br><font color="#FF6347">Zimeng Zhao</font>, Kanjian Zhang, Yangang Wang<br>
-                        <em>Optoelectronic Imaging and Multimedia Technology VII</em>, 2020 
-                        <br>[<a href="https://www.spiedigitallibrary.org/conference-proceedings-of-spie/11550/115500N/PP-Net--simultaneous-pose-and-shape-reconstruction-from-a/10.1117/12.2572825.short?SSO=1">paper</a>]
-                </p>
-            </div>
-            <br>
-        </tbody>
 
+
+            <!-- Topic02: 3D Vision -->
+            <div class="topic-item">
+                <div class="topic-header" onclick="toggleTopic(this)">
+                    <h2>3D Vision: Ariticulated Entities Reconstruction (2019 ~)</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="topic-content">
+                    <div class="paper-item">
+                        <div id="interframe2024" class="div_left">
+                            <img src="assets/imgs/paper_2024_midi2interframe.png" class="img-square" width="256">
+                        </div>
+                        <div id="interframe2024" class="div_right">
+                            <p><strong>Music Conditioned Generation for Human-centric Video</strong>
+                                <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, and Yangang Wang
+                                <br><em>IEEE Signal Processing Letters</em><b> (SPL)</b>, 2024
+                                <br>[<a href="https://ieeexplore.ieee.org/document/10415104">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <div id="supple2023" class="div_left">
+                            <img src="assets/imgs/paper_2023_suple.png" class="img-square" width="256">
+                        </div>
+                        <div id="supple2023" class="div_right">
+                            <p><strong>Skeleton Extraction for Articulated Objects with the Spherical Unwrapping Profiles</strong>
+                                <br><font color="#FF6347">Zimeng Zhao</font>, Wei Xie, Binghui Zuo and Yangang Wang<br>
+                                <em>IEEE Transactions on Visualization and Computer Graphics </em><b> (TVCG)</b>, 2023
+                                <br>[<a href="https://ieeexplore.ieee.org/document/10025400">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <div id="mkfree2023" class="div_left">
+                            <img src="assets/imgs/paper_2023_mkfree.png" class="img-square" width="256">
+                        </div>
+                        <div id="mkfree2023" class="div_right">
+                            <p><strong>Semi-supervised Hand Appearance Recovery via Structure Disentanglement and Dual Adversarial Discrimination</strong>
+                                <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, Zhiyu Long and Yangang Wang<br>
+                                <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition</em><b> (CVPR)</b>, 2023
+                                <br>[<a href="https://ieeexplore.ieee.org/document/10205157">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <div id="stable" class="div_left">
+                            <img src="assets/imgs/paper_2022_stable.png" class="img-square" width="256">
+                        </div>
+                        <div id="stable" class="div_right">
+                            <p><strong>Stability-driven Contact Reconstruction From Monocular Color Images</strong>
+                                <br><font color="#FF6347">Zimeng Zhao</font>, Binghui Zuo, Wei Xie and Yangang Wang<br>
+                                <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition</em><b> (CVPR)</b>, 2022
+                                <br>[<a href="https://ieeexplore.ieee.org/document/9878934">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <div id="travelnet" class="div_left">
+                            <img src="assets/imgs/paper_2021_travel.png" class="img-square" width="256">
+                        </div>
+                        <div id="travelnet" class="div_right">
+                            <p><strong>TravelNet: Self-supervised Physically Plausible Hand Motion Learning <br>From Monocular Color Images</strong>
+                                <br><font color="#FF6347">Zimeng Zhao</font>, Xi Zhao and Yangang Wang<br>
+                                <em>IEEE/CVF International Conference on Computer Vision</em><b> (ICCV)</b>, 2021
+                                <br>[<a href="https://ieeexplore.ieee.org/document/9709952">paper</a>]
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
         
-        <br/>
-        <!-- <br/>
-        <br/>
-        <div class="Teaching">
-        <header>
-            <h1> Teaching Assistant </h1>
-        </header>
-
-        <ul style="padding-left:2em">
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">Fall, 2022</span>
-                <span style="font-weight:bold">Artificial Intelligence
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">Fall, 2021</span>
-                <span style="font-weight:bold">Artificial Intelligence
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">Fall, 2020</span>
-                <span style="font-weight:bold">Linear Systems Theory
-            </li>
-        </div> -->
-
-        <br>
         <div class="Education">
-        <header>
-            <h1> Education </h1>
-        </header>
-
-        <ul style="padding-left:2em">
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">2024.11 - Current</span>
-                <span style="font-weight:bold">Postdoc</span>, 
-                Chinese Academy of Sciences, Qingdao, China
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">2021.03 - 2024.11</span>
-                <span style="font-weight:bold">Ph.D.</span>, 
-                Southeast University, Nanjing, China
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">2019.09 - 2020.12</span>
-                <span style="font-weight:bold">M.S. student</span>, 
-                Southeast University, Nanjing, China
-            </li>
-            <li style="padding-bottom:0.5em">
-                <span style="display:inline-block;width:9.5em">2015.09 - 2019.06</span>
-                <span style="font-weight:bold">B.E.</span>, 
-                Southeast University, Nanjing, China
-            </li>
+            <header>
+                <h1> Education </h1>
+            </header>
+            <ul style="padding-left:2em">
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:9.5em">2024.11 - Current</span>
+                    <span style="font-weight:bold">Postdoc</span>, 
+                    Chinese Academy of Sciences, Qingdao, China
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:9.5em">2021.03 - 2024.11</span>
+                    <span style="font-weight:bold">Ph.D.</span>, 
+                    Southeast University, Nanjing, China
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:9.5em">2019.09 - 2020.12</span>
+                    <span style="font-weight:bold">M.S. student</span>, 
+                    Southeast University, Nanjing, China
+                </li>
+                <li style="padding-bottom:0.5em">
+                    <span style="display:inline-block;width:9.5em">2015.09 - 2019.06</span>
+                    <span style="font-weight:bold">B.E.</span>, 
+                    Southeast University, Nanjing, China
+                </li>
+            </ul>
         </div>
-
-
     </div>
-    <!-- end div of ccontent  -->
+
+    <script>
+        function toggleTopic(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
+        
+        // 默认展开第一个主题
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstTopic = document.querySelector('.topic-item');
+            if (firstTopic) {
+                const header = firstTopic.querySelector('.topic-header');
+                const content = firstTopic.querySelector('.topic-content');
+                const icon = firstTopic.querySelector('.toggle-icon');
+                
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        });
+    </script>
 </body>
 </html>
