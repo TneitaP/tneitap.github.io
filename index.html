@@ -67,8 +67,12 @@
             min-width: 0;
         }
 
-        .News .news-extra[hidden] {
+        #news-list > li:nth-child(n + 4) {
             display: none;
+        }
+
+        #news-list.is-expanded > li:nth-child(n + 4) {
+            display: flex;
         }
 
         .news-toggle {
@@ -260,7 +264,7 @@
                 <li>
                     <span class="news-date">2026.09</span>
                     <div class="news-content">
-                        Booth presentation at <a href="https://www.inclusionconf.com/">Inclusion Conference on the Bund</a>. &#x1F4CD; 
+                        Invited exhibition at <a href="https://www.inclusionconf.com/">Inclusion Conference on the Bund 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai Expo Park</span>
                     </div>
                 </li>
@@ -278,43 +282,49 @@
                         <span style="color: gray;font-style: italic;">Glasgow SEC</span>
                     </div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2025.10</span>
                     <div class="news-content">
                         Invited talk at <a href="https://www.prcv.cn/">PRCV 2025 AI4S Workshop</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai NECC</span>
                     </div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2024.11</span>
                     <div class="news-content">Joined IOCAS as a postdoc.</div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2024.10</span>
                     <div class="news-content">Defended the Ph.D. thesis "Research on Reconstruction of Interactive Digital Hands".</div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2024.05</span>
                     <div class="news-content">Honored to receive the Huawei Scholarship.</div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2023.10</span>
                     <div class="news-content">
                         Poster presentations at <a href="https://iccv2023.thecvf.com/">ICCV 2023</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Paris Convention Centre</span>
                     </div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2023.04</span>
                     <div class="news-content">
                         Invited talk at <a href="http://china3dv.csig.org.cn/index.html">China3DV 2023 Student Forum</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Beijing Friendship Hotel</span>
                     </div>
                 </li>
-                <li class="news-extra" hidden>
+                <li>
                     <span class="news-date">2021.11</span>
                     <div class="news-content">
                         Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>.
+                    </div>
+                </li>
+                <li>
+                    <span class="news-date">2019.06</span>
+                    <div class="news-content">
+                        Honored to receive the SEU Excellent Bachelor Thesis and Excellent Graduate</a>.
                     </div>
                 </li>
             </ul>
@@ -481,13 +491,10 @@
 
     <script>
         function toggleNews(button) {
-            const extraNews = document.querySelectorAll('.News .news-extra');
+            const newsList = document.getElementById('news-list');
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-            extraNews.forEach(function(item) {
-                item.hidden = isExpanded;
-            });
-
+            newsList.classList.toggle('is-expanded', !isExpanded);
             button.setAttribute('aria-expanded', String(!isExpanded));
             button.textContent = isExpanded ? '...' : '↑';
         }
