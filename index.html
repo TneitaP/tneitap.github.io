@@ -11,6 +11,7 @@
     <link href="assets/font-awesome.min.css" rel="stylesheet">
     <link href="assets/syntax.css" rel="stylesheet">
     <link href="assets/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css">
     <link rel="shortcut icon" href="assets/imgs/icons/head_mice.svg" type="image/x-icon" />
     
     <style>
@@ -67,6 +68,88 @@
             min-width: 0;
         }
 
+        #news-map {
+            width: 100%;
+            height: 380px;
+            margin: 0 0 24px;
+            border: 1px solid #d9e2e8;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* CSS-drawn markers keep the map independent of icon-font availability. */
+        .news-map-marker,
+        .location-map-marker {
+            background: transparent;
+            border: 0;
+        }
+
+        .map-pushpin {
+            position: relative;
+            display: block;
+            width: 24px;
+            height: 30px;
+            color: #ef7777;
+            filter: drop-shadow(0 1px 1px rgba(50, 30, 30, 0.45));
+        }
+
+        .map-pushpin::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .map-pushpin::after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            bottom: 0;
+            width: 8px;
+            height: 11px;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+
+        .map-location-pointer {
+            position: relative;
+            display: block;
+            width: 24px;
+            height: 32px;
+            color: #4aa8d3;
+            filter: drop-shadow(0 1px 1px rgba(20, 55, 70, 0.5));
+        }
+
+        .map-location-pointer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50% 50% 50% 0;
+            background: currentColor;
+            transform: rotate(-45deg);
+        }
+
+        .map-location-pointer::after {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
         #news-list > li:nth-child(n + 4) {
             display: none;
         }
@@ -96,6 +179,10 @@
 
         /* 移动端适配 */
         @media (max-width: 768px) {
+            #news-map {
+                height: 300px;
+            }
+
             .News li, .Affiliations li {
                 flex-direction: column;
                 align-items: flex-start;
@@ -253,36 +340,41 @@
             <header>
                 <h1>News</h1>
             </header>
+            <div
+                id="news-map"
+                role="application"
+                aria-label="World map of news events, IOCAS, and SEU"
+            ></div>
             <ul id="news-list">
-                <li>
+                <li data-news-location="Qingdao Cosmopolitan Exposition" data-news-coordinates="35.824648,120.007891">
                     <span class="news-date">2026.10</span>
                     <div class="news-content">
                         Oral presentation at <a href="https://apgarss.com/">AP-GARSS 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Qingdao Cosmopolitan Exposition</span>
                     </div>
                 </li>
-                <li>
+                <li data-news-location="Shanghai Expo Park" data-news-coordinates="31.23,121.47">
                     <span class="news-date">2026.09</span>
                     <div class="news-content">
                         Invited exhibition at <a href="https://www.inclusionconf.com/">Inclusion Conference on the Bund 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai Expo Park</span>
                     </div>
                 </li>
-                <li>
+                <li data-news-location="Wuhan Optics Valley" data-news-coordinates="30.51,114.40">
                     <span class="news-date">2026.08</span>
                     <div class="news-content">
                         Invited talk at <a href="https://ccf.org.cn/ncca2026/">NCCA 2026 AI4Ocean Workshop</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Wuhan Optics Valley</span>
                     </div>
                 </li>
-                <li>
+                <li data-news-location="Glasgow SEC" data-news-coordinates="55.86,-4.29">
                     <span class="news-date">2026.02</span>
                     <div class="news-content">
                         Oral presentation at <a href="https://www.agu.org/Ocean-Sciences-Meeting/">OSM 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Glasgow SEC</span>
                     </div>
                 </li>
-                <li>
+                <li data-news-location="Shanghai NECC" data-news-coordinates="31.19,121.30">
                     <span class="news-date">2025.10</span>
                     <div class="news-content">
                         Invited talk at <a href="https://www.prcv.cn/">PRCV 2025 AI4S Workshop</a>. &#x1F4CD; 
@@ -301,17 +393,17 @@
                     <span class="news-date">2024.05</span>
                     <div class="news-content">Honored to receive the Huawei Scholarship.</div>
                 </li>
-                <li>
+                <li data-news-location="Paris Convention Centre" data-news-coordinates="48.83,2.29">
                     <span class="news-date">2023.10</span>
                     <div class="news-content">
                         Poster presentations at <a href="https://iccv2023.thecvf.com/">ICCV 2023</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Paris Convention Centre</span>
                     </div>
                 </li>
-                <li>
+                <li data-news-location="Beijing Friendship Hotel" data-news-coordinates="39.96,116.34">
                     <span class="news-date">2023.04</span>
                     <div class="news-content">
-                        Invited talk at <a href="http://china3dv.csig.org.cn/index.html">China3DV 2023 Student Forum</a>. &#x1F4CD; 
+                        Invited talk at <a href="https://www.csig.org.cn/163/202304/50991.html">China3DV 2023 Student Forum</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Beijing Friendship Hotel</span>
                     </div>
                 </li>
@@ -319,6 +411,13 @@
                     <span class="news-date">2021.11</span>
                     <div class="news-content">
                         Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>.
+                    </div>
+                </li>
+                <li data-news-location="Xiamen University Science and Art Center" data-news-coordinates="24.436,118.098">
+                    <span class="news-date">2021.06</span>
+                    <div class="news-content">
+                        Poster presentations at <a href="https://www.csig.org.cn/23/202107/50230.html">China3DV 2021</a>. &#x1F4CD; 
+                        <span style="color: gray;font-style: italic;">Xiamen University Science and Art Center</span>
                     </div>
                 </li>
                 <li>
@@ -489,7 +588,69 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
+        function initializeNewsMap() {
+            const mapElement = document.getElementById('news-map');
+            if (!mapElement || typeof L === 'undefined') {
+                return;
+            }
+
+            // Keep 0° longitude in the middle of the initial world view.
+            const newsMap = L.map(mapElement, {
+                center: [20, 0],
+                zoom: 2,
+                minZoom: 2,
+                maxZoom: 18,
+                worldCopyJump: false,
+                scrollWheelZoom: false
+            });
+
+            const satelliteImagery = L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                {
+                    maxZoom: 18,
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                }
+            ).addTo(newsMap);
+
+            const meetingIcon = L.divIcon({
+                className: 'news-map-marker',
+                html: '<span class="map-pushpin" aria-hidden="true"></span>',
+                iconSize: [24, 30],
+                iconAnchor: [12, 29],
+                tooltipAnchor: [0, -25]
+            });
+            const locationIcon = L.divIcon({
+                className: 'location-map-marker',
+                html: '<span class="map-location-pointer" aria-hidden="true"></span>',
+                iconSize: [24, 32],
+                iconAnchor: [12, 31],
+                tooltipAnchor: [0, -27]
+            });
+
+            document.querySelectorAll('#news-list > li[data-news-coordinates]').forEach(function (item) {
+                const coordinates = item.dataset.newsCoordinates.split(',').map(Number);
+                const date = item.querySelector('.news-date').textContent.trim();
+                const location = item.dataset.newsLocation;
+                L.marker(coordinates, { icon: meetingIcon })
+                    .addTo(newsMap)
+                    .bindTooltip(date + ' - ' + location, { direction: 'top' });
+            });
+
+            L.marker([35.785347, 120.03500], { icon: locationIcon })
+                .addTo(newsMap)
+                .bindTooltip('IOCAS, Qingdao (2024.11-Current)', { direction: 'top' });
+
+            L.marker([32.057648, 118.788282], { icon: locationIcon })
+                .addTo(newsMap)
+                .bindTooltip('SEU, Nanjing (2015.09-2024.12)', { direction: 'top' });
+            
+            L.marker([36.09393, 103.74600], { icon: locationIcon })
+                .addTo(newsMap)
+                .bindTooltip('NWNUSCH, Lanzhou (2012.09-2015.06)', { direction: 'top' });
+        }
+
         function toggleNews(button) {
             const newsList = document.getElementById('news-list');
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
@@ -523,6 +684,8 @@
                 content.classList.add('active');
                 icon.textContent = '▲';
             }
+
+            initializeNewsMap();
         });
     </script>
 </body>
