@@ -686,11 +686,12 @@
             document.querySelectorAll('#news-list > li[data-news-coordinates]').forEach(function (item) {
                 const coordinates = item.dataset.newsCoordinates.split(',').map(Number);
                 const date = item.querySelector('.news-date').textContent.trim();
+                const shortdate = date.slice(2);
                 const location = item.dataset.newsLocation;
                 const city = location.split(/\s+/)[0];
                 L.marker(coordinates, { icon: meetingIcon })
                     .addTo(newsMap)
-                    .bindTooltip(date + ': ' + city, { direction: 'top' });
+                    .bindTooltip(shortdate + ', ' + city, { direction: 'top' });
             });
 
             L.marker([35.785347, 120.03500], { icon: locationIcon })
