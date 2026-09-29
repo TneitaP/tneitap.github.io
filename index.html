@@ -672,20 +672,20 @@
                 const location = item.dataset.newsLocation;
                 L.marker(coordinates, { icon: meetingIcon })
                     .addTo(newsMap)
-                    .bindTooltip(date + ' - ' + location, { direction: 'top' });
+                    .bindTooltip(date + ', ' + location, { direction: 'top' });
             });
 
             L.marker([35.785347, 120.03500], { icon: locationIcon })
                 .addTo(newsMap)
-                .bindTooltip('IOCAS, Qingdao (2024.11-Current)', { direction: 'top' });
+                .bindTooltip('24.11- , IOCAS, Qingdao', { direction: 'top' });
 
             L.marker([32.057648, 118.788282], { icon: locationIcon })
                 .addTo(newsMap)
-                .bindTooltip('SEU, Nanjing (2015.09-2024.12)', { direction: 'top' });
+                .bindTooltip('15.09-24.12, SEU, Nanjing', { direction: 'top' });
             
             L.marker([36.09393, 103.74600], { icon: locationIcon })
                 .addTo(newsMap)
-                .bindTooltip('NWNUSCH, Lanzhou (2012.09-2015.06)', { direction: 'top' });
+                .bindTooltip('12.09-15.06, NWNUSCH, Lanzhou', { direction: 'top' });
 
             const legend = L.control({ position: 'bottomleft' });
             legend.onAdd = function () {
