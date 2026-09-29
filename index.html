@@ -390,14 +390,14 @@
                         <span style="color: gray;font-style: italic;">Qingdao Cosmopolitan Exposition</span>
                     </div>
                 </li>
-                <li data-news-location="Shanghai Expo Park" data-news-coordinates="31.23,121.47">
+                <li data-news-location="Shanghai Expo Park" data-news-coordinates="31.19676,121.48286">
                     <span class="news-date">2026.09</span>
                     <div class="news-content">
                         Invited exhibition at <a href="https://www.inclusionconf.com/">Inclusion Conference on the Bund 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai Expo Park</span>
                     </div>
                 </li>
-                <li data-news-location="Wuhan Optics Valley" data-news-coordinates="30.51,114.40">
+                <li data-news-location="Wuhan Optics Valley" data-news-coordinates="30.55240,114.49099">
                     <span class="news-date">2026.08</span>
                     <div class="news-content">
                         Invited talk at <a href="https://ccf.org.cn/ncca2026/">NCCA 2026 AI4Ocean Workshop</a>. &#x1F4CD; 
@@ -430,18 +430,25 @@
                     <span class="news-date">2024.05</span>
                     <div class="news-content">Honored to receive the Huawei Scholarship.</div>
                 </li>
-                <li data-news-location="Paris Convention Centre" data-news-coordinates="48.83,2.29">
+                <li data-news-location="Paris Convention Centre" data-news-coordinates="48.82730,2.28828">
                     <span class="news-date">2023.10</span>
                     <div class="news-content">
                         Poster presentations at <a href="https://iccv2023.thecvf.com/">ICCV 2023</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Paris Convention Centre</span>
                     </div>
                 </li>
-                <li data-news-location="Beijing Friendship Hotel" data-news-coordinates="39.96,116.34">
+                <li data-news-location="Beijing Friendship Hotel" data-news-coordinates="39.96244,116.31519">
                     <span class="news-date">2023.04</span>
                     <div class="news-content">
                         Invited talk at <a href="https://www.csig.org.cn/163/202304/50991.html">China3DV 2023 Student Forum</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Beijing Friendship Hotel</span>
+                    </div>
+                </li>
+                <li data-news-location="Beijing BYCC" data-news-coordinates="40.39715,116.66171">
+                    <span class="news-date">2022.08</span>
+                    <div class="news-content">
+                        Invited exhibition at <a href="https://cicai2022.caai.cn/">CICAI 2022</a>. &#x1F4CD; 
+                        <span style="color: gray;font-style: italic;">Beijing BYCC</span>
                     </div>
                 </li>
                 <li>
@@ -450,7 +457,7 @@
                         Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>.
                     </div>
                 </li>
-                <li data-news-location="Xiamen University Science and Art Center" data-news-coordinates="24.436,118.098">
+                <li data-news-location="Xiamen University Science and Art Center" data-news-coordinates="24.43836,118.09308">
                     <span class="news-date">2021.06</span>
                     <div class="news-content">
                         Poster presentations at <a href="https://www.csig.org.cn/23/202107/50230.html">China3DV 2021</a>. &#x1F4CD; 
@@ -643,6 +650,16 @@
                 scrollWheelZoom: false
             });
 
+            // Let the map own the wheel only while the pointer is over it.
+            // Leaflet keeps the pointer position as the zoom anchor.
+            mapElement.addEventListener('mouseenter', function () {
+                newsMap.scrollWheelZoom.enable();
+            });
+
+            mapElement.addEventListener('mouseleave', function () {
+                newsMap.scrollWheelZoom.disable();
+            });
+
             const satelliteImagery = L.tileLayer(
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
                 {
@@ -670,9 +687,10 @@
                 const coordinates = item.dataset.newsCoordinates.split(',').map(Number);
                 const date = item.querySelector('.news-date').textContent.trim();
                 const location = item.dataset.newsLocation;
+                const city = location.split(/\s+/)[0];
                 L.marker(coordinates, { icon: meetingIcon })
                     .addTo(newsMap)
-                    .bindTooltip(date + ', ' + location, { direction: 'top' });
+                    .bindTooltip(date + ': ' + city, { direction: 'top' });
             });
 
             L.marker([35.785347, 120.03500], { icon: locationIcon })
