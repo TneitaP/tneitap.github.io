@@ -150,6 +150,43 @@
             background: #fff;
         }
 
+        .map-legend {
+            min-width: 132px;
+            padding: 7px 9px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .map-legend-item {
+            display: flex;
+            align-items: center;
+            min-height: 30px;
+        }
+
+        .map-legend-item + .map-legend-item {
+            margin-top: 3px;
+        }
+
+        .map-legend-marker {
+            display: inline-flex;
+            align-items: flex-start;
+            justify-content: center;
+            width: 24px;
+            height: 31px;
+            margin-right: 7px;
+            flex: 0 0 24px;
+        }
+
+        .map-legend-marker .map-pushpin,
+        .map-legend-marker .map-location-pointer {
+            filter: none;
+        }
+
         #news-list > li:nth-child(n + 4) {
             display: none;
         }
@@ -649,6 +686,28 @@
             L.marker([36.09393, 103.74600], { icon: locationIcon })
                 .addTo(newsMap)
                 .bindTooltip('NWNUSCH, Lanzhou (2012.09-2015.06)', { direction: 'top' });
+
+            const legend = L.control({ position: 'bottomleft' });
+            legend.onAdd = function () {
+                const container = L.DomUtil.create('div', 'map-legend');
+                container.setAttribute('aria-label', 'Map legend');
+                container.innerHTML =
+                    '<div class="map-legend-item">' +
+                        '<span class="map-legend-marker" aria-hidden="true">' +
+                            '<span class="map-pushpin"></span>' +
+                        '</span>' +
+                        '<span>event</span>' +
+                    '</div>' +
+                    '<div class="map-legend-item">' +
+                        '<span class="map-legend-marker" aria-hidden="true">' +
+                            '<span class="map-location-pointer"></span>' +
+                        '</span>' +
+                        '<span>affiliation</span>' +
+                    '</div>';
+                L.DomEvent.disableClickPropagation(container);
+                return container;
+            };
+            legend.addTo(newsMap);
         }
 
         function toggleNews(button) {
