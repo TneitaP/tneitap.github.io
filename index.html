@@ -393,7 +393,7 @@
                 <li data-news-location="Shanghai Expo Park" data-news-coordinates="31.19676,121.48286">
                     <span class="news-date">2026.09</span>
                     <div class="news-content">
-                        Invited exhibition at <a href="https://www.inclusionconf.com/">Inclusion Conference on the Bund 2026</a>. &#x1F4CD; 
+                        Invited exhibition at <a href="https://www.inclusionconf.com/">InclusionConf 2026</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai Expo Park</span>
                     </div>
                 </li>
@@ -416,6 +416,13 @@
                     <div class="news-content">
                         Invited talk at <a href="https://www.prcv.cn/">PRCV 2025 AI4S Workshop</a>. &#x1F4CD; 
                         <span style="color: gray;font-style: italic;">Shanghai NECC</span>
+                    </div>
+                </li>
+                <li data-news-location="Beijing NMEFC" data-news-coordinates="39.952083, 116.321822">
+                    <span class="news-date">2025.06</span>
+                    <div class="news-content">
+                        Participated in the quasi-operational deployment of LangYa 1.0. &#x1F4CD; 
+                        <span style="color: gray;font-style: italic;">Beijing NMEFC</span>
                     </div>
                 </li>
                 <li>
@@ -688,10 +695,10 @@
                 const date = item.querySelector('.news-date').textContent.trim();
                 const shortdate = date.slice(2);
                 const location = item.dataset.newsLocation;
-                const city = location.split(/\s+/)[0];
+                // const city = location.split(/\s+/)[0];
                 L.marker(coordinates, { icon: meetingIcon })
                     .addTo(newsMap)
-                    .bindTooltip(shortdate + ', ' + city, { direction: 'top' });
+                    .bindTooltip(shortdate + ', ' + location, { direction: 'top' });
             });
 
             L.marker([35.785347, 120.03500], { icon: locationIcon })
