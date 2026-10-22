@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Zimeng Zhao</title>
@@ -323,6 +323,170 @@
         .topic-item:last-child {
             margin-bottom: 0;
         }
+
+        /* Page theme: dark by default, with a small toggle beside the name. */
+        :root {
+            --page-background: #0f1115;
+            --page-text: #e8edf2;
+            --page-muted-text: #b7c0ca;
+            --page-heading: #f4f7fa;
+            --page-link: #8fc9ff;
+            --page-link-hover: #c1e3ff;
+            --page-border: #3a4652;
+            --page-panel: #181e25;
+            --page-panel-strong: #202832;
+            --page-hr-background: #0f1115;
+        }
+
+        html[data-theme="light"] {
+            --page-background: #fff;
+            --page-text: #2c3e50;
+            --page-muted-text: #66727d;
+            --page-heading: #000;
+            --page-link: #2c3e50;
+            --page-link-hover: #1a252f;
+            --page-border: #eee;
+            --page-panel: #fff;
+            --page-panel-strong: #f7f9fb;
+            --page-hr-background: #fcfcfa;
+        }
+
+        html,
+        body {
+            background-color: var(--page-background);
+            color: var(--page-text);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .topic-header h2,
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--page-heading);
+        }
+
+        a,
+        article.home div a,
+        article.home pre a {
+            color: var(--page-link);
+        }
+
+        a:hover,
+        article.home div a:hover,
+        article.home pre a:hover {
+            color: var(--page-link-hover);
+        }
+
+        .topic-header {
+            border-bottom-color: var(--page-border);
+        }
+
+        .name-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .name-row h1 {
+            margin-bottom: 0;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--page-heading);
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .theme-toggle:hover,
+        .theme-toggle:focus-visible {
+            background-color: var(--page-panel-strong);
+            border-color: var(--page-border);
+            outline: none;
+        }
+
+        .theme-toggle:focus-visible {
+            box-shadow: 0 0 0 2px var(--page-link);
+        }
+
+        .News .news-content span[style*="color: gray"],
+        .Affiliations .affiliation-content span[style*="color: gray"] {
+            color: var(--page-muted-text) !important;
+        }
+
+        .hr-text {
+            color: var(--page-text);
+        }
+
+        .hr-text:after {
+            color: var(--page-muted-text);
+            background-color: var(--page-hr-background);
+        }
+
+        .news-toggle {
+            border-color: var(--page-link);
+            color: var(--page-link);
+        }
+
+        .news-toggle:hover,
+        .news-toggle:focus-visible {
+            background-color: var(--page-link);
+            color: var(--page-background);
+        }
+
+        .map-legend {
+            border-color: var(--page-border);
+            background: var(--page-panel);
+            color: var(--page-text);
+        }
+
+        .leaflet-control-zoom a,
+        .leaflet-control-attribution {
+            background: var(--page-panel);
+            color: var(--page-text);
+        }
+
+        .leaflet-control-zoom a {
+            border-color: var(--page-border);
+            color: var(--page-text);
+        }
+
+        .leaflet-control-attribution a {
+            color: var(--page-link);
+        }
+
+        #icon-list img {
+            border-radius: 4px;
+            background: transparent;
+            clip-path: inset(0 round 4px);
+        }
+
+        html[data-theme="dark"] #icon-list img {
+            filter: invert(1);
+        }
+
+        .theme-icon {
+            display: block;
+            width: 1em;
+            height: 1em;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @media (max-width: 768px) {
+            .name-row {
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 
@@ -334,7 +498,19 @@
             </div>
 
             <div id="contact-list" class="div_right">
-                <h1>Zimeng Zhao 赵子萌</h1>
+                <div class="name-row">
+                    <h1>Zimeng Zhao 赵子萌</h1>
+                    <button
+                        class="theme-toggle"
+                        type="button"
+                        aria-label="切换为浅色主题"
+                        title="切换为浅色主题"
+                        onclick="toggleTheme(this)"
+                    ><svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg></button>
+                </div>
                 
                 <div id="icon-list">
                     <li><a href="https://scholar.google.com/citations?user=XtBkmC8AAAAJ&hl">
@@ -764,6 +940,21 @@
             newsList.classList.toggle('is-expanded', !isExpanded);
             button.setAttribute('aria-expanded', String(!isExpanded));
             button.textContent = isExpanded ? '...' : '↑';
+        }
+
+        function toggleTheme(button) {
+            const root = document.documentElement;
+            const isDark = root.getAttribute('data-theme') !== 'light';
+            const nextTheme = isDark ? 'light' : 'dark';
+            const nextLabel = isDark ? '切换为深色主题' : '切换为浅色主题';
+            const nextIcon = isDark
+                ? '<svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5A8.5 8.5 0 1 0 20.5 15.2z"></path></svg>'
+                : '<svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+
+            root.setAttribute('data-theme', nextTheme);
+            button.setAttribute('aria-label', nextLabel);
+            button.setAttribute('title', nextLabel);
+            button.innerHTML = nextIcon;
         }
 
         function toggleTopic(header) {
