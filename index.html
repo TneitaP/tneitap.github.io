@@ -503,8 +503,8 @@
                     <button
                         class="theme-toggle"
                         type="button"
-                        aria-label="切换为浅色主题"
-                        title="切换为浅色主题"
+                        aria-label="Toggle to light theme"
+                        title="Toggle to light theme"
                         onclick="toggleTheme(this)"
                     ><svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"></circle>
@@ -580,6 +580,10 @@
                         <span style="color: gray;font-style: italic;">Wuhan Optics Valley</span>
                     </div>
                 </li>
+                <li>
+                    <span class="news-date">2026.08</span>
+                    <div class="news-content">Recipient of the CAS Special Research Assistant Funding Program.</div>
+                </li>
                 <li data-news-location="Changsha NUDT" data-news-coordinates="28.232425, 113.007889">
                     <span class="news-date">2026.06</span>
                     <div class="news-content">
@@ -618,7 +622,7 @@
                 </li>
                 <li>
                     <span class="news-date">2024.05</span>
-                    <div class="news-content">Honored to receive the Huawei Scholarship.</div>
+                    <div class="news-content">Recipient of the Huawei Scholarship.</div>
                 </li>
                 <li data-news-location="Paris Convention Centre" data-news-coordinates="48.82730,2.28828">
                     <span class="news-date">2023.10</span>
@@ -656,9 +660,15 @@
                     </div>
                 </li>
                 <li>
+                    <span class="news-date">2022.05</span>
+                    <div class="news-content">
+                        Oral presentation at the SEU 120th Anniversary Graduate Research Symposium.
+                    </div>
+                </li>
+                <li>
                     <span class="news-date">2021.11</span>
                     <div class="news-content">
-                        Honored to receive the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>.
+                        Recipient of the <a href="https://yzb.seu.edu.cn/2021/1101/c6677a388734/page.htm">SEU Doctoral Entrance Scholarship</a>.
                     </div>
                 </li>
                 <li data-news-location="Xiamen University Science and Art Center" data-news-coordinates="24.43836,118.09308">
@@ -671,7 +681,7 @@
                 <li>
                     <span class="news-date">2019.06</span>
                     <div class="news-content">
-                        Honored to receive the SEU Excellent Bachelor Thesis and Excellent Graduate</a>.
+                        Recipient of the SEU Excellent Bachelor Thesis Award and Excellent Graduate Award.
                     </div>
                 </li>
             </ul>
@@ -946,7 +956,7 @@
             const root = document.documentElement;
             const isDark = root.getAttribute('data-theme') !== 'light';
             const nextTheme = isDark ? 'light' : 'dark';
-            const nextLabel = isDark ? '切换为深色主题' : '切换为浅色主题';
+            const nextLabel = isDark ? 'Toggle to dark theme' : 'Toggle to light theme';
             const nextIcon = isDark
                 ? '<svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5A8.5 8.5 0 1 0 20.5 15.2z"></path></svg>'
                 : '<svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
