@@ -38,20 +38,20 @@
             flex: 1;
         }
         
-        /* 优化新闻和经历列表的布局 */
-        .News ul, .Affiliations ul {
+        /* 新闻列表布局 */
+        .News ul {
             padding-left: 0;
             list-style: none;
         }
 
-        .News li, .Affiliations li {
+        .News li {
             display: flex;
             align-items: flex-start;
             margin-bottom: 0.8em;
             padding: 0.3em 0;
         }
 
-        .news-date, .affiliation-date {
+        .news-date {
             flex-shrink: 0;
             width: 6em;
             margin-right: 1em;
@@ -59,11 +59,7 @@
             font-weight: normal;
         }
 
-        .Affiliations .affiliation-date {
-            width: 9.5em;
-        }
-
-        .news-content, .affiliation-content {
+        .news-content {
             flex: 1;
             min-width: 0;
         }
@@ -220,19 +216,19 @@
                 height: 300px;
             }
 
-            .News li, .Affiliations li {
+            .News li {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .news-date, .affiliation-date {
+            .news-date {
                 width: auto;
                 margin-right: 0;
                 margin-bottom: 0.3em;
                 font-weight: bold;
             }
             
-            .news-content, .affiliation-content {
+            .news-content {
                 width: 100%;
             }
         }
@@ -415,8 +411,7 @@
             box-shadow: 0 0 0 2px var(--page-link);
         }
 
-        .News .news-content span[style*="color: gray"],
-        .Affiliations .affiliation-content span[style*="color: gray"] {
+        .News .news-content span[style*="color: gray"] {
             color: var(--page-muted-text) !important;
         }
 
@@ -482,9 +477,155 @@
             stroke-linejoin: round;
         }
 
+        /* Keep category fills fixed in both themes; only the label color changes. */
+        .affiliation-timeline {
+            --education-fill: #a8d5ba;
+            --employment-fill: #8fc9ff;
+            --bar-text: #fff;
+            --bar-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+        }
+
+        html[data-theme="light"] .affiliation-timeline {
+            --bar-text: #000;
+            --bar-text-shadow: none;
+        }
+
+        .affiliation-scroll {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .affiliation-axis-row {
+            display: none;
+        }
+
+        .affiliation-lane {
+            --lane-fill: var(--education-fill);
+            margin-top: 12px;
+        }
+
+        .affiliation-lane.employment {
+            --lane-fill: var(--employment-fill);
+        }
+
+        .affiliation-category {
+            margin: 0;
+            padding: 0;
+            color: var(--page-heading);
+            font: inherit;
+            font-weight: 600;
+        }
+
+        .affiliation-track {
+            margin: 8px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .affiliation-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px 0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: var(--lane-fill);
+            color: var(--bar-text);
+            text-shadow: var(--bar-text-shadow);
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.45;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        .affiliation-label strong,
+        .affiliation-label span {
+            display: block;
+        }
+
+        .affiliation-timeline.is-ready {
+            min-width: 920px;
+        }
+
+        .affiliation-timeline.is-ready .affiliation-axis-row,
+        .affiliation-timeline.is-ready .affiliation-lane {
+            display: grid;
+            grid-template-columns: 116px minmax(0, 1fr);
+            column-gap: 16px;
+            align-items: center;
+        }
+
+        .affiliation-axis {
+            grid-column: 2;
+            height: 28px;
+            border-bottom: 1px solid var(--page-border);
+        }
+
+        .affiliation-axis,
+        .affiliation-timeline.is-ready .affiliation-track {
+            position: relative;
+            margin: 0 6px;
+        }
+
+        .affiliation-timeline.is-ready .affiliation-track {
+            height: 48px;
+        }
+
+        .affiliation-timeline.is-ready .affiliation-bar {
+            position: absolute;
+            top: 4px;
+            left: var(--start);
+            width: var(--duration);
+            height: 40px;
+            margin: 0;
+        }
+
+        .affiliation-tick,
+        .affiliation-gridline {
+            position: absolute;
+            left: var(--position);
+            top: 0;
+        }
+
+        .affiliation-tick {
+            font-size: 12px;
+            color: var(--page-muted-text);
+            transform: translateX(-50%);
+        }
+
+        .affiliation-tick:first-child {
+            transform: none;
+        }
+
+        .affiliation-gridline {
+            bottom: 0;
+            width: 1px;
+            background: var(--page-border);
+        }
+
+        .affiliation-bar.is-current::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 4px);
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lane-fill);
+            box-shadow: 0 0 0 3px var(--page-background);
+        }
+
         @media (max-width: 768px) {
             .name-row {
                 gap: 8px;
+            }
+
+            .affiliation-timeline.is-ready .affiliation-category {
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background: var(--page-background);
             }
         }
     </style>
@@ -828,41 +969,99 @@
             <header>
                 <h1>Affiliations</h1>
             </header>
-            <ul>
-                <li>
-                    <span class="affiliation-date">2024.11 - Current</span>
-                    <div class="affiliation-content">
-                        <span style="font-weight:bold">Postdoc</span>, 
-                        Chinese Academy of Sciences, Qingdao, China
+            <div class="affiliation-scroll" role="region" aria-label="Affiliations timeline; scroll horizontally on small screens" tabindex="0">
+                <div class="affiliation-timeline" role="group" aria-label="Education and employment by year">
+                    <div class="affiliation-axis-row" aria-hidden="true">
+                        <div class="affiliation-axis"></div>
                     </div>
-                </li>
-                <li>
-                    <span class="affiliation-date">2021.03 - 2024.11</span>
-                    <div class="affiliation-content">
-                        <span style="font-weight:bold">Ph.D.</span>, 
-                        Southeast University, Nanjing, China
+                    <div class="affiliation-lane education">
+                        <h2 class="affiliation-category">Education</h2>
+                        <ul class="affiliation-track" aria-label="Education">
+                            <li class="affiliation-bar">
+                                <span class="affiliation-label"><strong>B.E.,</strong><span>SEU, Nanjing</span></span>
+                                <span class="sr-only"><time datetime="2015-09">2015.09</time> - <time datetime="2019-06">2019.06</time></span>
+                            </li>
+                            <li class="affiliation-bar">
+                                <span class="affiliation-label"><strong>M.S.,</strong><span>SEU, Nanjing</span></span>
+                                <span class="sr-only"><time datetime="2019-09">2019.09</time> - <time datetime="2020-12">2020.12</time></span>
+                            </li>
+                            <li class="affiliation-bar">
+                                <span class="affiliation-label"><strong>Ph.D.,</strong><span>SEU, Nanjing</span></span>
+                                <span class="sr-only"><time datetime="2021-03">2021.03</time> - <time datetime="2024-11">2024.11</time></span>
+                            </li>
+                        </ul>
                     </div>
-                </li>
-                <li>
-                    <span class="affiliation-date">2019.09 - 2020.12</span>
-                    <div class="affiliation-content">
-                        <span style="font-weight:bold">M.S. student</span>, 
-                        Southeast University, Nanjing, China
+                    <div class="affiliation-lane employment">
+                        <h2 class="affiliation-category">Employment</h2>
+                        <ul class="affiliation-track" aria-label="Employment">
+                            <li class="affiliation-bar is-current">
+                                <span class="affiliation-label"><strong>Postdoc,</strong><span>CAS, Qingdao</span></span>
+                                <span class="sr-only"><time datetime="2024-11">2024.11</time> - Current</span>
+                            </li>
+                        </ul>
                     </div>
-                </li>
-                <li>
-                    <span class="affiliation-date">2015.09 - 2019.06</span>
-                    <div class="affiliation-content">
-                        <span style="font-weight:bold">B.E.</span>, 
-                        Southeast University, Nanjing, China
-                    </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
+        function initializeAffiliationsTimeline(now = new Date()) {
+            const timeline = document.querySelector('.affiliation-timeline');
+            if (!timeline) {
+                return;
+            }
+
+            // Integer month indices avoid day lengths and timezone conversions.
+            const monthIndex = value => {
+                const [year, month] = value.split('-').map(Number);
+                return year * 12 + month - 1;
+            };
+            const currentMonth = now.getFullYear() * 12 + now.getMonth();
+            const bars = Array.from(timeline.querySelectorAll('.affiliation-bar')).map(bar => {
+                const dates = bar.querySelectorAll('time');
+                return {
+                    bar,
+                    start: monthIndex(dates[0].getAttribute('datetime')),
+                    end: dates.length > 1 ? monthIndex(dates[1].getAttribute('datetime')) : currentMonth
+                };
+            });
+            const firstYear = Math.floor(Math.min(...bars.map(item => item.start)) / 12);
+            const lastYear = Math.max(now.getFullYear(), ...bars.map(item => Math.floor(item.end / 12)));
+            const origin = firstYear * 12;
+            const totalMonths = (lastYear - firstYear + 1) * 12;
+            const axis = timeline.querySelector('.affiliation-axis');
+            axis.replaceChildren();
+            const tracks = Array.from(timeline.querySelectorAll('.affiliation-track'));
+            tracks.forEach(track => {
+                track.querySelectorAll('.affiliation-gridline').forEach(line => line.remove());
+            });
+            bars.forEach(({ bar, start, end }) => {
+                bar.style.setProperty('--start', ((start - origin) / totalMonths * 100) + '%');
+                // End months are inclusive; the bar ends at the next month's boundary.
+                bar.style.setProperty('--duration', ((end - start + 1) / totalMonths * 100) + '%');
+            });
+            for (let year = firstYear; year <= lastYear; year++) {
+                if ((year - firstYear) % 2 !== 0 && year !== lastYear) {
+                    continue;
+                }
+                const tick = document.createElement('span');
+                tick.className = 'affiliation-tick';
+                tick.style.setProperty('--position', ((year - firstYear) * 12 / totalMonths * 100) + '%');
+                tick.textContent = year;
+                axis.appendChild(tick);
+                tracks.forEach(track => {
+                    const line = document.createElement('span');
+                    line.className = 'affiliation-gridline';
+                    line.style.setProperty('--position', tick.style.getPropertyValue('--position'));
+                    line.setAttribute('aria-hidden', 'true');
+                    track.prepend(line);
+                });
+            }
+            timeline.classList.add('is-ready');
+        }
+
         function initializeNewsMap() {
             const mapElement = document.getElementById('news-map');
             if (!mapElement || typeof L === 'undefined') {
@@ -1007,6 +1206,7 @@
                 icon.textContent = '▲';
             }
 
+            initializeAffiliationsTimeline();
             initializeNewsMap();
         });
     </script>
