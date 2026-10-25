@@ -621,11 +621,22 @@
                 gap: 8px;
             }
 
+            .affiliation-timeline.is-ready .affiliation-axis-row,
+            .affiliation-timeline.is-ready .affiliation-lane {
+                grid-template-columns: minmax(0, 1fr);
+                column-gap: 0;
+                row-gap: 6px;
+            }
+
+            .affiliation-timeline.is-ready .affiliation-axis {
+                grid-column: 1;
+            }
+
             .affiliation-timeline.is-ready .affiliation-category {
                 position: sticky;
                 left: 0;
-                z-index: 1;
-                background: var(--page-background);
+                width: max-content;
+                background: transparent;
             }
         }
     </style>
